@@ -1,0 +1,111 @@
+﻿<html>
+<head>
+	<meta charset="UTF-8">
+	
+	<title>凝響</title>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.16/clipboard.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	
+	<style>
+	body
+	{
+		text-align : center;
+	}
+
+	#trafficInfo
+	{
+		text-align : left;
+		margin : 0 auto;
+		width : 80%;
+		padding : 10px;
+	}
+	
+	#trafficMap
+	{
+	}
+	
+	#copyAddr
+	{
+		cursor : pointer;
+	}
+	</style>
+
+	<script>
+		$(document).ready
+		(
+			function()
+			{
+				$("#copyAddr").click( copyAddress );
+			}
+		);
+		
+		function copyAddress(e)
+		{
+			var addrText = document.querySelector("#addr");
+			var range = document.createRange();
+			range.selectNode(addrText);
+			window.getSelection().removeAllRanges();
+			window.getSelection().addRange(range);  
+
+			try 
+			{
+				var successful = document.execCommand("copy");  
+				var msg = successful ? "successful" : "unsuccessful";  
+				console.log("Copy email command was " + msg);
+				if (successful)
+				{
+					alert("複製成功");
+				}
+			}
+			catch(err)
+			{
+				console.log("Oops, unable to copy");  
+			}  
+
+			window.getSelection().removeAllRanges();
+		}
+		
+	</script>
+</head>
+<body>
+
+	<div id="trafficInfo">
+		<p>
+			<h4><b>閱樂書店：&nbsp;&nbsp;</b><a id="copyAddr">複製</a></h4>
+			<blockquote>
+				【<label id="addr">台北市信義區光復南路133號</label>（松菸文創區內生態池旁綠色小木屋）】
+			</blockquote>
+		</p>
+		<hr>
+		
+		<p>
+			<h4><b>捷運：</b></h4>
+			<blockquote>
+				<b>市政府站 1號出口 (步行約7分鐘)：</b></br>
+				直行過基隆路路口經過忠孝東路四段553巷（聯合報旁）右轉，</br>
+				直直走看到松山文創園區入口進來，沿著湖邊走到盡頭看見綠色木屋就是囉（誠品行旅對面）。</br>
+				</br>
+				<b>國父紀念館站 5號出口 (步行約10分鐘)：</b></br>
+				公車：忠孝東路【聯合報站】</br>
+				212、212夜、212直、232、232副、232快、240、240直、263、270、299、忠孝新幹線</br>
+			</blockquote>
+		</p>
+		<hr>
+
+		<p>
+			<h4><b>停車資訊：</b></h4>
+			<blockquote>
+				臺北文創大樓地下收費停車場，由菸廠路（市民大道、光復南路口）駛入。
+			</blockquote>
+		</p>
+	</div>
+	
+	</br>
+	<div id="trafficMap">
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.716779110529!2d121.557161315576!3d25.04368388396778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abc0ac49edb7%3A0xa99b97e9a3702ff2!2zMTEw5Y-w5YyX5biC5L-h576p5Y2A5YWJ5b6p5Y2X6LevMTMz6Jmf!5e0!3m2!1szh-TW!2stw!4v1482472660880" width="800" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,396 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>凝．響</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	
+	<style>
+		#banner
+		{
+			background: url("static/bannerBG.png");
+			background-color:#FFFFFF;
+			
+			position: fixed;
+			top : 0;
+			left : 0;
+			right : 0;
+			
+			z-index : 10;
+			width : 100%;
+		}
+		#bannerTB
+		{
+			width:100%;
+			margin : 0 auto;
+		}
+
+		.bannerImg
+		{
+			width:100%;
+			max-width:200px;
+		}
+
+		.width100
+		{
+			width:100%;
+		}
+		
+		.width80
+		{
+			width:80%;
+		}
+		
+		.width50
+		{
+			width:50%;
+		}
+
+		.width20
+		{
+			width:20%;
+		}
+		
+		body
+		{
+			background: url("static/bodyBG.png");
+			font-family: "小塚ゴシック Pr6N", "方正兰亭超细黑简体", "なごみ極細ゴシック ExtraLight";
+		}
+
+		.page
+		{
+			margin-top:100px;
+		}
+		
+		.closelyL
+		{
+			margin-right : -2px;
+			padding-right : 0px;
+		}
+		
+		.closelyR
+		{
+			margin-left : -2px;
+			padding-left : 0px;
+		}
+
+		.trackIntro
+		{
+		}
+		
+		#copyAddr
+		{
+			cursor : pointer;
+		}
+	</style>
+
+	<script>
+		$(document).ready
+		(
+			function()
+			{
+				$(window).load(showBanner);
+				createTracks();
+				$("#copyAddr").click( copyAddress );
+			}
+		);
+
+		function showBanner()
+		{
+			$(window).bind('scroll resize', function()
+			{
+				var $this = $(this);
+				var $this_Top=$this.scrollTop();
+
+				//當高度小於100時，關閉區塊 
+				if($this_Top < 100){
+					$('#banner').stop().slideUp();
+				}
+				if($this_Top > 100){
+					$('#banner').stop().slideDown();
+				}
+			}).scroll();
+		}
+	
+		var G_trackNum = 8;
+		function createTracks()
+		{
+			var trackInfo=
+			{
+				"1":"《異想天開》是劉星先生創作的《天地之間》第六號作品。屬於New Age風格的中阮二重奏曲，而這次音樂會選擇用琵琶二重奏來詮釋，為王世榮老師改編的版本。本曲收錄於他的專輯《孤芳自賞》中，也是《天地之間》系列作品中的唯一一首二重奏曲。",
+				"2":"樂曲具有濃郁的西域地方音樂特點，琵琶運用較多的拉弦、大幅度的吟揉，以及右手的力度變化。似在古老的絲綢之路上的商賈隊中，一琵琶高手端坐在駝背上，悠然自得的演奏著．．．。",
+				"3":"曲目介紹3",
+				"4":"樂曲根據抗日戰爭時期一個真實的故事為背景，表現了1941年秋，在冀北山區易水河畔狼牙山棋盤坨上，五位英勇戰士與日本侵略者浴血奮戰，最後縱身跳下了萬丈懸崖，用生命和鮮血譜寫出一首氣吞山河的壯麗詩篇，熱情歌頌了英雄們的壯舉和為國為民的獻身精神。樂曲採用傳統的敘事體形式，首次借鑒西洋奏鳴曲式結構，與民族的音調及琵琶傳統手法相結合。在演奏技法方面，除了大量運用琵琶武曲常用的技法外，還首創了左手大指上品按音，更加豐富了琵琶的演奏技巧，全曲結構嚴謹，旋律流暢，氣勢磅礴，具有很強的戲劇性效果，打破了一般的民樂獨奏曲創作的習慣，給人耳目一新之感。",
+				"5":"曲目介紹5",
+				"6":"《改進操》是1927年12月劉天華為紀念「國樂改進社」成立而作的一首琵琶曲。表達了作者對立社的喜悅和對振興國樂的信心與期望。曲中前一部份模擬古琴技法，並在第二段採用了複音試驗。</br>「操」本是古琴曲的一種體裁，一般指大、中型獨奏作品，大多以閉塞之聲抒憂愁之心，而此曲卻以明快流利之音抒興奮喜悅之情，表達的是作者對立社的喜悅和對振興國樂的信心與期望。",
+				"7":"曲目介紹7",
+				"8":"琵琶、三弦二重奏，此次音樂會改用琵琶二重奏來詮釋。本曲根據王惠然的琵琶曲《江南三月》改編，描寫了江南地區秀麗風光和江南人民愉快生活的場景。作者運用了評彈的素材，在改編中更是採用了琵琶與三弦的評彈演奏形式，表現江南三月萬物復甦、春氣盎然的景象。",
+			}
+			for( var index = 1; index <=G_trackNum; index++ )
+			{
+				var trackR = "trackR"+index;
+				var intro = "trackIntro"+index;
+				
+				var elementStr=
+				String.format('<div class="col-xs-8 col-md-6" id="{0}">',trackR)+
+					String.format('<img class="width100" src="static/tracks/{0}.png">',trackR)+
+					String.format('<div id="{0}" class="trackIntro">',intro)+
+						String.format('<p>{0}</p>',trackInfo[index])+
+					'</div>'+
+				'</div>';
+				
+				$("#tracks").append(elementStr);
+				
+				// 註冊很多事件
+				$("#"+trackR).click(function(e)
+				{
+					var idx = e.currentTarget.id.replace("trackR","");
+					slideAllTracks(idx);
+				});
+				
+				$("#"+intro).hide();
+			}
+		}
+	
+		function slideAllTracks( clickIdx )
+		{
+			for( var index = 1; index <=G_trackNum; index++ )
+			{
+				var intro = "#trackIntro"+index;
+				if ( index != clickIdx )
+				{
+					$(intro).slideUp();
+				}
+				else
+				{
+					$(intro).slideToggle();
+				}
+			}
+		}
+	
+		function copyAddress(e)
+		{
+			var addrText = document.querySelector("#addr");
+			var range = document.createRange();
+			range.selectNode(addrText);
+			window.getSelection().removeAllRanges();
+			window.getSelection().addRange(range);  
+
+			try 
+			{
+				var successful = document.execCommand("copy");  
+				var msg = successful ? "successful" : "unsuccessful";  
+				console.log("Copy email command was " + msg);
+				if (successful)
+				{
+					alert("複製成功");
+				}
+			}
+			catch(err)
+			{
+				console.log("Oops, unable to copy");  
+			}  
+
+			window.getSelection().removeAllRanges();
+		}
+	</script>
+	<script>
+		String.format = function() 
+		{
+			// The string containing the format items (e.g. "{0}")
+			// will and always has to be the first argument.
+			var theString = arguments[0];
+
+			// start with the second argument (i = 1)
+			for (var i = 1; i < arguments.length; i++) {
+				// "gm" = RegEx options for Global search (more than one instance)
+				// and for Multiline search
+				var regEx = new RegExp("\\{" + (i - 1) + "\\}", "gm");
+				theString = theString.replace(regEx, arguments[i]);
+			}
+
+			return theString;
+		}
+	</script>
+</head>
+<body>
+	<!--置頂banner-->
+	<div id="banner">
+		<table id="bannerTB">
+			<tr>
+				<th class="width20"><a href="#page2"><img class="bannerImg" src="static/banner/1.png"></a></th>
+				<th class="width20"><a href="#page3"><img class="bannerImg" src="static/banner/2.png"></a></th>
+				<th class="width20"><a href="#page1"><img class="bannerImg" src="static/banner/logo.png"></a></th>
+				<th class="width20"><a href="#page4"><img class="bannerImg" src="static/banner/3.png"></a></th>
+				<th class="width20"><a href="#page5"><img class="bannerImg" src="static/banner/4.png"></a></th>
+			</tr>
+		</table>
+	</div>
+
+	<!--第一頁 主頁-->
+	<div id="page1"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-3 col-md-6">
+				<img class="width100" src="static/page1.png">
+			</div>
+		</div>
+
+		</br>
+		<div class="row">
+			<div class="col-md-offset-1 col-md-10 width80" >
+				<h2>凝<span style="color:#C1272D">．</span>響</h2>
+				<p>碩一的我們想辦場形制相對輕鬆的音樂會。</p>
+			
+				<p>雨儂說：「凝，音諧同於寧，取之為凝，希望將琵琶音樂中的空，傳達出來，
+					亦即多年來依戀琵琶音樂的這部分，空的回蕩，仍有力往下一個音符前進。正
+					如人生一樣，庸庸碌碌總需要一個「空」的時間，凝望生命的累積。」</p>
+
+				<p>佳容說：「凝有凝思、凝望之義， 這字對我來說是當下的專注與想望，2016年
+					不斷專注於檢視自己，誠實面對每個狀態：踉蹌的 完好的 遺憾的 區辨的 費解
+					的 區辨難解的 曖昧不明的，希望這些思緒可以內化成養分，在適當時盛開。最
+					後還是想對自己說那句話：沒問題的！」
+					我們對凝都有不同的想像與看法，也貪心的無法擱下渴望，找了多首不同曲風
+					的曲子，期待由不同的面貌呈現，還是認為能繼續彈琴是件無比幸運的事</p>
+
+				<p>在理想的咖啡香與書牆間來聽聽我們彈琴吧。</p>
+			</div>
+		</div>
+	</div>
+	
+	<!--第二頁 演奏者-->
+	<div id="page2"></div>
+	<div class="container page">
+		<div class="row">
+			<div class="col-md-offset-1 col-md-10">
+				<a href="#playerL"><img class="width50 closelyL" src="static/page2L.png"></a>
+				<a href="#playerR"><img class="width50 closelyR" src="static/page2R.png"></a>
+			</div>
+		</div>
+		
+		<!--演奏者 左-->
+		<div id="playerL"></div>
+		<div class="row page">
+			<div class="col-md-6">
+				<img class="width100" src="static/playerL.png">
+			</div>
+			
+			<div class="col-md-6">
+				<div class="width100">
+				<h2><b>我是標題</b></h2>
+				<p>我是內文我超長我是內文我超長</p>
+				<p>是</p>
+				<p>內</p>
+				<p>文</p>
+				<p>我</p>
+				<p>超</p>
+				<p>長</p>
+				<p>我</p>
+				<p>是</p>
+				<p>內</p>
+				<p>文</p>
+				<p>我</p>
+				<p>超</p>
+				<p>長</p>
+				</div>
+			</div>
+		</div>
+		
+		<!--演奏者 右-->
+		<div id="playerR"></div>
+		<div class="row page">
+			<div class="col-md-6">
+				<img class="width100" src="static/playerR.png">
+			</div>
+			<div class="col-md-6">
+				<div class="width100">
+					<h2><b>演出者簡介   林雨儂</b></h2>
+					</br>
+					<p>1992 年出生於台北市，現就讀於台北藝術大學傳統音樂所演奏組−琵琶主修，師事
+					賴秀綢老師，畢業於國立臺灣師範大學音樂系，主修琵琶。
+					</br>
+					國小三年級進入了台北市興雅國小國樂團，開啟琵琶學習之路。國中則進入台北市
+					介壽國中國樂團，亦曾於國中時期進入台北市立國樂團少年團擔任大阮。曾師事賴
+					秀綢、吳依穎、林慧萍及許牧慈老師,亦曾受琵琶名家劉德海、楊惟、吳玉霞、王
+					範地、楊靖、董楠、李佳指導。現於興雅國小、東興國中擔任彈撥分組老師。
+					從小學至大學間專注學習在琵琶傳統演奏及曲目上,亦於大學期間,廣泛接觸戲劇及
+					舞蹈等表演藝術的訓練與演出，期盼多元接觸不同領域，能在琵琶演奏上更有不同
+					的累積及火花,亦於大四後開始接觸電子及現代樂曲，參與新生代作曲家作品發表
+					，涉獵西樂與琵琶室內樂、琵琶與吉他二重奏、琵琶與電子音樂等，不同樂器聲響
+					的組合演出，亦開始接觸音樂即興等領域。</p>
+
+					<h2><b>近年重要演出</b></h2>
+					</br>
+					<p>2014.8.2《錫穗風采》介壽.錫穗國樂團 2014 年度音樂會主奏《祝福》</p>
+					<p>2014.12.13/20 《迴聲城市:未來》參與琵琶即興音樂家</p>
+					<p>2015.9.17-20 隨無垢舞蹈劇團於國家戲劇廳演出《花神祭》擔任樂手冬枯之中的古石</p>
+					<p>2015.11.23-28 參與台法電子音樂工作坊,並首演《Drifting Mountain》琵琶與電子音樂當代作品</p>
+					<p>2015.4.23  采風樂坊 東方器樂劇場《十面埋伏》樂手</p>
+
+					<h2><b>得獎經歷</b></h2>
+					</br>
+					<p>台北市97學年度學生藝術比賽－音樂琵琶獨奏東區優等第二名 </p>
+					<p>台北市101學年度學生藝術比賽—音樂琵琶獨奏A組南區優等 </p>
+					<p>台北市103學年度學生藝術比賽—音樂琵琶獨奏A組南區優等第一名</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!--第三頁 曲目-->
+	<div id="page3"></div>
+	<div class="container page">
+		<div class="row" id="tracks">
+			<div class="col-xs-3 col-md-offset-1 col-md-3">
+				<img class="width100" src="static/tracks/trackL.png">
+			</div>
+
+		</div>
+	</div>
+	
+	<!--第四頁 演出資訊-->
+	<div id="page4"></div>
+	<div class="container page">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
+				<img class="width100" src="static/page4.png">
+			</div>
+		</div>
+	</div>
+	
+	<!--第五頁 交通-->
+	<div id="page5"></div>
+	<div class="container page">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>閱樂書店</h2>
+				</br>
+				<label id="addr">台北市信義區光復南路133號</label>&nbsp;&nbsp;<a id="copyAddr">複製</a>
+				<p>松菸文創區內生態池旁綠色小木屋</p>
+			
+				</br>
+				<div id="trafficMap">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.716779110529!2d121.557161315576!3d25.04368388396778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abc0ac49edb7%3A0xa99b97e9a3702ff2!2zMTEw5Y-w5YyX5biC5L-h576p5Y2A5YWJ5b6p5Y2X6LevMTMz6Jmf!5e0!3m2!1szh-TW!2stw!4v1482472660880" width="100%" height="600px" frameborder="0" style="border:0" allowfullscreen></iframe>
+				</div>
+
+				</br>
+				<p>捷運:</p>
+				<p>1.捷運國父紀念館站5號出口:步行約10分鐘</p>
+				<p>2.市政府站1號出口:步行約10分鐘</p>
+				<p>直行過基隆路路口經過忠孝東路四段553巷（聯合報旁）右轉，直直走看到松山文創園區入口進來，沿著湖邊走到盡頭看見綠色木屋就是囉（誠品行旅對面）。</p>
+				</br>
+				<p>公車:</p>
+				<p>忠孝東路【聯合報站】</p>
+				<p>212、212夜、212直、232、232副、232快、240、240直、263、270、299、忠孝新幹線</p>
+				</br>
+				<p>停車資訊:</p>
+				<p>臺北文創大樓地下收費停車場，由菸廠路（市民大道、光復南路口）駛入。</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

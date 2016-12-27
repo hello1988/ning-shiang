@@ -63,7 +63,7 @@
 
 		.page
 		{
-			margin-top:100px;
+			margin-top:80px;
 		}
 		
 		.closelyL
@@ -80,6 +80,34 @@
 
 		.trackIntro
 		{
+			text-align:center;
+		}
+
+		#tracksDiv
+		{
+			margin-left:10%;
+			width:80%;
+		}
+		#trackL
+		{
+			width:25%;
+			vertical-align:top;
+		}
+		#trackR
+		{
+			width:75%;
+			vertical-align:top;
+		}
+		.trackBG
+		{
+			background:url('static/tracks/trackBG.png');
+			background-size:100%;
+			background-repeat:repeat-y;
+		}
+		#trackPipa
+		{
+			width:100%;
+			background-color:#FFFFFF;
 		}
 		
 		#copyAddr
@@ -134,9 +162,9 @@
 			{
 				var trackR = "trackR"+index;
 				var intro = "trackIntro"+index;
-				
+
 				var elementStr=
-				String.format('<div class="col-xs-8 col-md-6" id="{0}">',trackR)+
+				String.format('<div style="margin-left:10%;width:80%;" id="{0}">',trackR)+
 					String.format('<img class="width100" src="static/tracks/{0}.png">',trackR)+
 					String.format('<div id="{0}" class="trackIntro">',intro)+
 						String.format('<p>{0}</p>',trackInfo[index])+
@@ -335,7 +363,7 @@
 
 					<h2><b>得獎經歷</b></h2>
 					</br>
-					<p>台北市97學年度學生藝術比賽－音樂琵琶獨奏東區優等第二名 </p>
+					<p>台北市 97學年度學生藝術比賽—音樂琵琶獨奏東區優等第二名 </p>
 					<p>台北市101學年度學生藝術比賽—音樂琵琶獨奏A組南區優等 </p>
 					<p>台北市103學年度學生藝術比賽—音樂琵琶獨奏A組南區優等第一名</p>
 				</div>
@@ -345,15 +373,26 @@
 	
 	<!--第三頁 曲目-->
 	<div id="page3"></div>
-	<div class="container page">
-		<div class="row" id="tracks">
-			<div class="col-xs-3 col-md-offset-1 col-md-3">
-				<img class="width100" src="static/tracks/trackL.png">
-			</div>
-
-		</div>
+	<div class="page" id="tracksDiv">
+		<table class="width100" >
+			<tr>
+				<td id="trackL" class="trackBG">
+					<div>
+						<img id="trackPipa" src="static/tracks/trackL.png">
+					</div>
+				</td>
+				<td rowspan="2" id="trackR">
+					<div id="tracks"></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="trackBG">
+					&nbsp;
+				</td>
+			</tr>
+		</table>
 	</div>
-	
+
 	<!--第四頁 演出資訊-->
 	<div id="page4"></div>
 	<div class="container page">
